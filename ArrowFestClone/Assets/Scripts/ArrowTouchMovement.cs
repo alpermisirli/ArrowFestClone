@@ -48,6 +48,7 @@ public class ArrowTouchMovement : MonoBehaviour
         transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime);
         if (moving)
         {
+            //TODO LIMIT MOVEMENT TO BORDERS
             transform.position = new Vector3(targetPos.x, transform.position.y, transform.position.z);
             if (transform.position.x == targetPos.x)
             {

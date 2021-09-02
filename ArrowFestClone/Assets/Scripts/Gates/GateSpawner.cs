@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GateSpawner : MonoBehaviour
 {
+    
+    //todo first two rows must be blue dont forget
     // Start is called before the first frame update
     void Start()
     {

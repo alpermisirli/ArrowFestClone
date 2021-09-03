@@ -31,10 +31,10 @@ public class ArrowTouchMovement : MonoBehaviour
         }
 
         Vector2 touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
-        Debug.Log("Touch position" + touchPos);
+        //Debug.Log("Touch position" + touchPos);
 
         Ray worldPosRay = _mainCamera.ScreenPointToRay(touchPos);
-        Debug.Log("World Position" + worldPosRay);
+        //Debug.Log("World Position" + worldPosRay);
         RaycastHit hit;
         if (Physics.Raycast(worldPosRay, out hit, 1000))
         {

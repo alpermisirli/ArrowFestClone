@@ -1,12 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Gate : MonoBehaviour
 {
-    [SerializeField] private Material blueMaterial;
+    private GameObject arrowStack;
 
+    [SerializeField] private Material blueMaterial;
+    [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private Material redMaterial;
     [SerializeField] private TMP_Text _gateText;
     private MeshRenderer _meshRenderer;
@@ -22,6 +26,15 @@ public class Gate : MonoBehaviour
         AssignNumber();
         AssignText();
         //Debug.Log(gameObject + "Number : " + gateNumber + " Operator : " + gateOperator);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            arrowStack = other.gameObject;
+            GateOperation();
+        }
     }
 
     /// <summary>
@@ -72,5 +85,61 @@ public class Gate : MonoBehaviour
     private void AssignText()
     {
         _gateText.text = gateOperator + gateNumber;
+    }
+
+    /// <summary>
+    /// Calculates the new arrow size
+    /// </summary>
+    private void GateOperation()
+    {
+        int arrowCount = arrowStack.transform.childCount;
+        int newArrowCount;
+        int arrowToInstantiate;
+        int arrowToDestroy;
+        Debug.Log("There are ," + arrowCount + " child objects in arrow stack");
+        if (gateOperator == "*")
+        {
+            newArrowCount = arrowCount * gateNumber;
+            arrowToInstantiate = newArrowCount - arrowCount;
+            for (int i = 0; i < arrowToInstantiate; i++)
+            {
+                Instantiate(arrowPrefab, arrowStack.transform);
+            }
+
+            Debug.Log("New arrow count is :" + newArrowCount);
+        }
+        else if (gateOperator == "/")
+        {
+            newArrowCount = arrowCount / gateNumber;
+            arrowToDestroy = arrowCount - newArrowCount;
+            for (int i = 0; i < arrowToDestroy; i++)
+            {
+                Destroy(arrowStack.transform.GetChild(i).gameObject);
+            }
+
+            Debug.Log("New arrow count is :" + newArrowCount);
+        }
+        else if (gateOperator == "+")
+        {
+            newArrowCount = arrowCount + gateNumber;
+            arrowToInstantiate = newArrowCount - arrowCount;
+            for (int i = 0; i < arrowToInstantiate; i++)
+            {
+                Instantiate(arrowPrefab, arrowStack.transform);
+            }
+
+            Debug.Log("New arrow count is :" + newArrowCount);
+        }
+        else if (gateOperator == "-")
+        {
+            newArrowCount = arrowCount - gateNumber;
+            arrowToDestroy = arrowCount - newArrowCount;
+            for (int i = 0; i < arrowToDestroy; i++)
+            {
+                Destroy(arrowStack.transform.GetChild(i).gameObject);
+            }
+
+            Debug.Log("New arrow count is :" + newArrowCount);
+        }
     }
 }

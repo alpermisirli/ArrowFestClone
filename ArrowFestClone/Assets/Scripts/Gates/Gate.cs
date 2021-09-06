@@ -13,10 +13,12 @@ public class Gate : MonoBehaviour
     [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private Material redMaterial;
     [SerializeField] private TMP_Text _gateText;
+    [SerializeField] private bool start;
     private MeshRenderer _meshRenderer;
     private int gateNumber;
 
-    private string gateOperator;
+
+    public string gateOperator;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +44,11 @@ public class Gate : MonoBehaviour
     /// </summary>
     private void AssignOperator()
     {
+        if (start)
+        {
+            return;
+        }
+
         int rand = Random.Range(0, 4);
         switch (rand)
         {

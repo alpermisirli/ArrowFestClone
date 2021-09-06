@@ -36,6 +36,7 @@ public class Gate : MonoBehaviour
         {
             arrowStack = other.gameObject;
             GateOperation();
+            Destroy(this.gameObject); //TODO CHECK BACK
         }
     }
 

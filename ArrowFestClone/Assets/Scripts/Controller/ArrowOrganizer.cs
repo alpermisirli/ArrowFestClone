@@ -5,19 +5,26 @@ using UnityEngine;
 
 public class ArrowOrganizer : MonoBehaviour
 {
-    //TODO PUT TO THE ARROWSTACK GAMEOBJECT TO ORDER THE CHILDREN ARROW IN A WAY
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    [SerializeField] private float rx = 2f; // horizontal radius
+    [SerializeField] private float ry = 1.5f; // vertical radius
 
     private void Update()
     {
-        int count = transform.childCount;
-        for(int i = 0; i < count; i++)
+        ArrowPositionUpdater();
+    }
+
+    private void ArrowPositionUpdater()
+    {
+        int arrowCount = transform.childCount;
+        float angleSelection = Mathf.PI * 2f / arrowCount;
+        for (int i = 0; i < arrowCount; i++)
         {
             Transform child = transform.GetChild(i);
-            //TODO THE POSITION OF EACH CHILDREN
+            float angle = i * angleSelection;
+            Vector3 arrowPosition = transform.position + new Vector3(rx * Mathf.Cos(angle),
+                ry * Mathf.Sin(angle) * Mathf.Sqrt(i),
+                0f);
+            child.position = arrowPosition;
         }
     }
 }

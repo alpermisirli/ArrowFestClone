@@ -21,9 +21,17 @@ public class ArrowOrganizer : MonoBehaviour
         {
             Transform child = transform.GetChild(i);
             float angle = i * angleSelection;
+            //todo reduce ry with increasing numbers of arrows
+            //todo increase rx at the end of level
             Vector3 arrowPosition = transform.position + new Vector3(rx * Mathf.Cos(angle),
                 ry * Mathf.Sin(angle) * Mathf.Sqrt(i),
                 0f);
+            //For keeping the first arrow in the middle
+            if (i == 0)
+            {
+                arrowPosition = transform.position;
+            }
+
             child.position = arrowPosition;
         }
     }

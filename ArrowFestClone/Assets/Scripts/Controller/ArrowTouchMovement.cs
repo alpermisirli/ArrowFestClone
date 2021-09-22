@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -50,7 +51,7 @@ public class ArrowTouchMovement : MonoBehaviour
         {
             //TODO LIMIT MOVEMENT TO BORDERS
             transform.position = new Vector3(targetPos.x, transform.position.y, transform.position.z);
-            if (transform.position.x == targetPos.x)
+            if (Math.Abs(transform.position.x - targetPos.x) < 0.1f)
             {
                 moving = false;
             }

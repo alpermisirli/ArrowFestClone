@@ -21,7 +21,8 @@ public class ArrowOrganizer : MonoBehaviour
         {
             Transform child = transform.GetChild(i);
             float angle = i * angleSelection;
-            //todo reduce ry with increasing numbers of arrows
+            //Reducing ry with the increasing amount of arrows to better fit in the line
+            ry = Mathf.Sqrt(arrowCount) / arrowCount;
             //todo increase rx at the end of level
             Vector3 arrowPosition = transform.position + new Vector3(rx * Mathf.Cos(angle),
                 ry * Mathf.Sin(angle) * Mathf.Sqrt(i),
